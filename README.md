@@ -1,4 +1,4 @@
-# Java spring boot docker kubernetes shopping microservice
+# Java spring boot docker kubernetes shopping microservice with AWS
 Deploying java spring boot shopping microservices with Docker, Kubernetes and AWS
 
 ### Microservices:
