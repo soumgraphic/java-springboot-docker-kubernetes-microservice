@@ -6,24 +6,25 @@ metadata:
   labels:
     app: productcatalogue
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: productcatalogue
   ports:
-  - protocol: TCP
-    port: 8020
-    name: http
-
+    - protocol: TCP
+      port: 80
+      targetPort: 8020    
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: productcatalogue
+  labels:
+    app: productcatalogue
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: productcatalogue
-  replicas: 1
   template:
     metadata:
       labels:
@@ -31,7 +32,7 @@ spec:
     spec:
       containers:
       - name: productcatalogue
-        image: thetips4you/productcatalogue:latest
+        image: 533267044690.dkr.ecr.eu-west-1.amazonaws.com/ecommerce-app-repo:productcatalogue-latest
         ports:
         - containerPort: 8020
         livenessProbe:

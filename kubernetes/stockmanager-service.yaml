@@ -6,25 +6,25 @@ metadata:
   labels:
     app: stockmanager
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: stockmanager
   ports:
-  - protocol: TCP
-    port: 8030
-    name: http
-
+    - protocol: TCP
+      port: 80
+      targetPort: 8030       
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: stockmanager
+  labels:
+    app: stockmanager
 spec:
-  spec:
+  replicas: 2
   selector:
     matchLabels:
       app: stockmanager
-  replicas: 1
   template:
     metadata:
       labels:
@@ -32,12 +32,12 @@ spec:
     spec:
       containers:
       - name: stockmanager
-        image: thetips4you/stockmanager:latest
+        image: 533267044690.dkr.ecr.eu-west-1.amazonaws.com/ecommerce-app-repo:stockmanager-latest
         ports:
         - containerPort: 8030
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8030
-          initialDelaySeconds: 30
-          timeoutSeconds: 1
+        # livenessProbe:
+          # httpGet:
+            # path: /health
+            # port: 8030
+          # initialDelaySeconds: 30
+          # timeoutSeconds: 1

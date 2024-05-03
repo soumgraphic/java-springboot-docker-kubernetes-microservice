@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecommerce-app-config
+data:
+  productcatalogue-url: http://productcatalogue:80
+  stockmanager-url: http://stockmanager:80
